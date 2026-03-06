@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: nepal-election-results
+    runtime: node
+    buildCommand: npm install && npm run build
+    startCommand: NODE_ENV=production node server.js
+    plan: free
+    envVars:
+      - key: DATA_MODE
+        value: live
+      - key: SCRAPE_INTERVAL_SECONDS
+        value: "120"
+      - key: MAX_REQUESTS_PER_MINUTE
+        value: "30"
+      - key: NODE_ENV
+        value: production
+    healthCheckPath: /api/status
+    autoDeploy: true
