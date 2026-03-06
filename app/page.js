@@ -69,8 +69,10 @@ export default function HomePage() {
     <>
       <Header />
       <LiveBar
-        lastUpdated={national?.lastUpdated}
-        source={national?.dataSource}
+        lastUpdated={national?._meta?.lastUpdated}
+        source={national?._meta?.source}
+        scrapeInProgress={national?._meta?.scrapeInProgress}
+        lastScraped={national?._meta?.lastScraped}
       />
       <StatBanner summary={national} />
 

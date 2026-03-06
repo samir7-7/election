@@ -25,6 +25,8 @@ export async function GET(request) {
       _meta: {
         source: store.dataSource,
         lastUpdated: store.lastUpdated,
+        lastScraped: store.lastScraped,
+        scrapeInProgress: store.scrapeInProgress,
         disclaimer:
           "Provisional data. Refer to Election Commission of Nepal for official results.",
       },
