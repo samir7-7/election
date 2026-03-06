@@ -1,0 +1,1322 @@
+/* ============================================================
+   NEPAL ELECTION RESULTS PLATFORM
+   Design System & Global Styles
+   
+   Principles:
+   - Vibrant, colorful election dashboard
+   - Bold Nepal-flag-inspired accents (crimson + blue)
+   - Strong typographic hierarchy
+   - Data-dense but scannable
+   - Alive and energetic feel for real-time tracking
+   ============================================================ */
+
+/* ---- CSS Custom Properties (Design Tokens) ---- */
+:root {
+  /* --- Colors --- */
+  --bg-page: #f0f4f8;
+  --bg-surface: #ffffff;
+  --bg-surface-alt: #f7f9fc;
+  --bg-surface-hover: #eef2f7;
+  --bg-inset: #e2e8f0;
+  --bg-dark: #0f172a;
+  --bg-dark-alt: #1e293b;
+
+  --border-light: #e2e8f0;
+  --border-medium: #cbd5e1;
+  --border-dark: #94a3b8;
+
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-tertiary: #64748b;
+  --text-inverse: #f8fafc;
+  --text-link: #2563eb;
+
+  /* Accent — Nepal crimson, vibrant */
+  --accent: #dc2626;
+  --accent-soft: #fef2f2;
+  --accent-muted: #ef4444;
+  --accent-dark: #b91c1c;
+
+  /* Nepal blue (from flag/pennant) */
+  --nepal-blue: #003893;
+  --nepal-blue-light: #e0ecff;
+  --nepal-crimson: #dc143c;
+
+  /* Status colors — brighter */
+  --status-live: #dc2626;
+  --status-live-bg: #fef2f2;
+  --status-completed: #059669;
+  --status-completed-bg: #ecfdf5;
+  --status-pending: #d97706;
+  --status-pending-bg: #fffbeb;
+  --status-counting: #2563eb;
+  --status-counting-bg: #eff6ff;
+
+  /* Party colors — vivid */
+  --party-nc: #2563eb;
+  --party-uml: #dc2626;
+  --party-maoist: #991b1b;
+  --party-rsp: #ea580c;
+  --party-rpp: #7c3aed;
+  --party-jsp: #16a34a;
+  --party-ind: #6b7280;
+  --party-other: #9ca3af;
+
+
+
+  /* --- Typography --- */
+  --font-body: 'Noto Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Noto Serif', Georgia, 'Times New Roman', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+
+  --text-xs: 0.7rem;
+  --text-sm: 0.8125rem;
+  --text-base: 0.9375rem;
+  --text-md: 1.0625rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 1.875rem;
+  --text-3xl: 2.375rem;
+
+  --leading-tight: 1.2;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.7;
+
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* --- Spacing --- */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+
+  /* --- Layout --- */
+  --max-width: 1140px;
+  --max-width-narrow: 800px;
+  --gutter: 1.25rem;
+  --header-height: 3.75rem;
+
+  /* --- Effects --- */
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08), 0 2px 4px rgba(15, 23, 42, 0.04);
+  --shadow-lg: 0 10px 25px rgba(15, 23, 42, 0.1), 0 4px 10px rgba(15, 23, 42, 0.05);
+  --shadow-colored: 0 4px 14px rgba(220, 38, 38, 0.15);
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+}
+
+/* ---- Reset & Base ---- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--text-primary);
+  background-color: var(--bg-page);
+  min-height: 100vh;
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: var(--text-link);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+/* ---- Utility ---- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+}
+
+.container--narrow {
+  max-width: var(--max-width-narrow);
+}
+
+/* ---- Tabular (monospace) numbers for data ---- */
+.num {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.site-header {
+  background: var(--bg-dark);
+  color: var(--text-inverse);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 3px solid var(--nepal-crimson);
+  box-shadow: 0 2px 12px rgba(0, 56, 147, 0.2);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-height);
+  gap: var(--space-md);
+}
+
+.site-header__brand {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-sm);
+}
+
+.site-header__flag {
+  font-size: 1.2rem;
+  margin-right: 2px;
+}
+
+.site-header__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  color: var(--text-inverse);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.site-header__subtitle {
+  font-size: var(--text-xs);
+  color: rgba(255,255,255,0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: var(--weight-medium);
+  background: rgba(255,255,255,0.1);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.site-header__nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.site-header__link {
+  color: rgba(255,255,255,0.75);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+  padding: 4px 0;
+  border-bottom: 2px solid transparent;
+}
+.site-header__link:hover {
+  color: #fff;
+  text-decoration: none;
+}
+.site-header__link--active {
+  color: #fff;
+  text-decoration: none;
+  border-bottom-color: var(--nepal-crimson);
+}
+
+/* ============================================================
+   LIVE INDICATOR
+   ============================================================ */
+.live-bar {
+  background: #fef2f2;
+  border-bottom: 1px solid #fecaca;
+  padding: 6px 0;
+}
+
+.live-bar__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--text-sm);
+  color: var(--status-live);
+  font-weight: var(--weight-semibold);
+}
+
+.live-dot {
+  width: 9px;
+  height: 9px;
+  background: var(--status-live);
+  border-radius: 50%;
+  animation: pulse 1.5s ease-in-out infinite;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2);
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.85); }
+}
+
+.live-bar__time {
+  color: var(--text-secondary);
+  font-weight: var(--weight-normal);
+  margin-left: auto;
+}
+
+/* ============================================================
+   STAT BANNER (National overview numbers)
+   ============================================================ */
+.stat-banner {
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-light);
+  padding: var(--space-lg) 0;
+}
+
+.stat-banner__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--space-md);
+}
+
+.stat-banner__item {
+  text-align: center;
+  padding: var(--space-md) var(--space-sm);
+  border-radius: var(--radius-md);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.stat-banner__item:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.stat-banner__item:not(:last-child) {
+  border-right: 1px solid var(--border-light);
+}
+
+.stat-banner__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+.stat-banner__value {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  font-variant-numeric: tabular-nums;
+  line-height: var(--leading-tight);
+}
+
+.stat-banner__label {
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 4px;
+}
+
+/* ============================================================
+   SECTION STRUCTURE
+   ============================================================ */
+.section {
+  padding: var(--space-2xl) 0;
+}
+
+.section + .section {
+  border-top: none;
+}
+
+.section__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--space-lg);
+  gap: var(--space-md);
+}
+
+.section__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  color: var(--text-primary);
+  line-height: var(--leading-tight);
+}
+
+.section__title::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 1em;
+  background: var(--nepal-crimson);
+  border-radius: 2px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.section__subtitle {
+  font-size: var(--text-sm);
+  color: var(--text-tertiary);
+}
+
+.section__link {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  white-space: nowrap;
+}
+
+/* ============================================================
+   PARTY SEATS BAR (Horizontal stacked bar)
+   ============================================================ */
+.seats-bar {
+  width: 100%;
+  height: 36px;
+  display: flex;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--bg-inset);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
+  gap: 2px;
+}
+
+.seats-bar__segment {
+  height: 100%;
+  transition: width 600ms cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  min-width: 3px;
+}
+
+.seats-bar__segment:first-child {
+  border-radius: var(--radius-md) 0 0 var(--radius-md);
+}
+
+.seats-bar__segment:last-child {
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+.seats-bar--sm {
+  height: 18px;
+  border-radius: var(--radius-sm);
+}
+
+/* ---- Seats legend ---- */
+.seats-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm) var(--space-lg);
+  margin-top: var(--space-md);
+}
+
+.seats-legend__item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--text-sm);
+}
+
+.seats-legend__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.seats-legend__count {
+  font-weight: var(--weight-semibold);
+  font-variant-numeric: tabular-nums;
+}
+
+.seats-legend__name {
+  color: var(--text-secondary);
+}
+
+/* ============================================================
+   LEADING TALLY
+   ============================================================ */
+.leading-tally {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-md);
+}
+
+.leading-tally__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+  flex-wrap: wrap;
+}
+
+.leading-tally__title {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  margin: 0;
+  color: var(--nepal-blue);
+}
+
+.leading-tally__subtitle {
+  font-size: var(--text-sm);
+  color: var(--text-tertiary);
+  background: var(--bg-surface-alt);
+  padding: 2px 10px;
+  border-radius: 10px;
+}
+
+.leading-tally__bar {
+  display: flex;
+  height: 36px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: var(--space-lg);
+  gap: 2px;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
+}
+
+.leading-tally__bar-seg {
+  min-width: 4px;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.leading-tally__table {
+  margin-top: 0;
+  border-radius: var(--radius-md);
+}
+
+.leading-tally__table th:first-child,
+.leading-tally__table td:first-child {
+  width: 36px;
+  text-align: center;
+  color: var(--text-tertiary);
+}
+
+.leading-tally__table tbody tr:nth-child(1) {
+  background: #fffbeb;
+}
+
+.leading-tally__table tbody tr:nth-child(2) {
+  background: #f0fdf4;
+}
+
+.leading-tally__table tbody tr:nth-child(3) {
+  background: #eff6ff;
+}
+
+.leading-tally__dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex-shrink: 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+
+/* ============================================================
+   DATA TABLE (Results)
+   ============================================================ */
+.data-table {
+  width: 100%;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--bg-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.data-table th {
+  background: var(--bg-dark);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(255,255,255,0.85);
+  padding: 10px var(--space-md);
+  text-align: left;
+  border-bottom: none;
+  white-space: nowrap;
+}
+
+.data-table th:last-child,
+.data-table td:last-child {
+  text-align: right;
+}
+
+.data-table td {
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--border-light);
+  font-size: var(--text-sm);
+  vertical-align: middle;
+}
+
+.data-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.data-table tbody tr:hover {
+  background: #f1f5f9;
+}
+
+.data-table tbody tr {
+  transition: background var(--transition-fast);
+}
+
+.data-table--compact td,
+.data-table--compact th {
+  padding: 6px var(--space-sm);
+}
+
+/* ============================================================
+   CONSTITUENCY LISTING
+   ============================================================ */
+.constituency-list {
+  display: grid;
+  gap: 1px;
+  background: var(--border-light);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.constituency-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--bg-surface);
+  text-decoration: none;
+  color: inherit;
+  transition: background var(--transition-fast);
+}
+
+.constituency-row:hover {
+  background: var(--bg-surface-hover);
+  text-decoration: none;
+}
+
+.constituency-row__name {
+  font-weight: var(--weight-medium);
+  font-size: var(--text-sm);
+}
+
+.constituency-row__district {
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+}
+
+.constituency-row__leader {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--text-sm);
+}
+
+.constituency-row__party-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.constituency-row__status {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+/* ============================================================
+   STATUS BADGES
+   ============================================================ */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  padding: 2px 8px;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+
+.badge--counting {
+  background: var(--status-counting-bg);
+  color: var(--status-counting);
+  border: 1px solid rgba(37, 99, 235, 0.2);
+}
+
+.badge--completed {
+  background: var(--status-completed-bg);
+  color: var(--status-completed);
+  border: 1px solid rgba(5, 150, 105, 0.2);
+}
+
+.badge--pending {
+  background: var(--status-pending-bg);
+  color: var(--status-pending);
+  border: 1px solid rgba(217, 119, 6, 0.2);
+}
+
+.badge--provisional {
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid rgba(146, 64, 14, 0.2);
+}
+
+/* ============================================================
+   VOTE BAR (Horizontal bar for candidate votes)
+   ============================================================ */
+.vote-bar-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.vote-bar-row {
+  display: grid;
+  grid-template-columns: 160px 1fr 70px;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--text-sm);
+}
+
+.vote-bar-row--leading {
+  font-weight: var(--weight-semibold);
+}
+
+.vote-bar-name {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.vote-bar-name__text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.vote-bar-party {
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+}
+
+.vote-bar-track {
+  height: 22px;
+  background: var(--bg-inset);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.06);
+}
+
+.vote-bar-fill {
+  height: 100%;
+  border-radius: var(--radius-sm);
+  transition: width 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 2px;
+}
+
+.vote-bar-count {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--weight-medium);
+}
+
+/* ============================================================
+   NEPAL MAP
+   ============================================================ */
+.nepal-map-container {
+  position: relative;
+  width: 100%;
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.nepal-map svg {
+  width: 100%;
+  height: auto;
+}
+
+.nepal-map__province {
+  stroke: var(--bg-surface);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  cursor: pointer;
+  transition: opacity var(--transition-fast), stroke-width var(--transition-fast), filter var(--transition-fast);
+}
+
+.nepal-map__province:hover {
+  opacity: 0.82;
+  stroke-width: 2.5;
+  filter: brightness(1.08);
+}
+
+.nepal-map__province:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.nepal-map__province--active {
+  stroke: var(--text-primary);
+  stroke-width: 2.5;
+}
+
+.nepal-map__label {
+  font-size: 9px;
+  font-weight: var(--weight-semibold);
+  fill: var(--bg-surface);
+  pointer-events: none;
+  text-anchor: middle;
+  dominant-baseline: central;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.nepal-map__tooltip {
+  position: absolute;
+  background: var(--bg-dark);
+  color: var(--text-inverse);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  pointer-events: none;
+  z-index: 10;
+  white-space: nowrap;
+  box-shadow: var(--shadow-md);
+  transform: translate(-50%, -100%);
+  margin-top: -8px;
+}
+
+.nepal-map__tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: var(--bg-dark);
+}
+
+/* ============================================================
+   SEARCH OVERLAY
+   ============================================================ */
+.search-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255,255,255,0.7);
+  font-size: var(--text-sm);
+  padding: 5px 14px;
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 20px;
+  transition: all var(--transition-fast);
+  background: rgba(255,255,255,0.08);
+}
+.search-btn:hover {
+  color: #fff;
+  border-color: rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.15);
+}
+.search-btn kbd {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  opacity: 0.5;
+  margin-left: 4px;
+}
+
+.search-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(28, 25, 23, 0.5);
+  z-index: 200;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 12vh;
+}
+
+.search-panel {
+  background: var(--bg-surface);
+  border-radius: var(--radius-md);
+  width: 90%;
+  max-width: 560px;
+  box-shadow: 0 16px 48px rgba(0,0,0,0.2);
+  overflow: hidden;
+}
+
+.search-panel__input-wrap {
+  display: flex;
+  align-items: center;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid var(--border-light);
+  gap: var(--space-sm);
+}
+
+.search-panel__icon {
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+}
+
+.search-panel__input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-family: var(--font-body);
+  font-size: var(--text-md);
+  color: var(--text-primary);
+  background: transparent;
+}
+.search-panel__input::placeholder {
+  color: var(--text-tertiary);
+}
+
+.search-results {
+  max-height: 50vh;
+  overflow-y: auto;
+  padding: var(--space-sm) 0;
+}
+
+.search-result-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-sm) var(--space-lg);
+  text-decoration: none;
+  color: inherit;
+  transition: background var(--transition-fast);
+}
+.search-result-item:hover {
+  background: var(--bg-surface-hover);
+  text-decoration: none;
+}
+
+.search-result-item__name {
+  font-weight: var(--weight-medium);
+  font-size: var(--text-sm);
+}
+
+.search-result-item__sub {
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+}
+
+.search-empty {
+  padding: var(--space-xl);
+  text-align: center;
+  color: var(--text-tertiary);
+  font-size: var(--text-sm);
+}
+
+/* ============================================================
+   CANDIDATE DETAIL CARD (used in constituency pages)
+   ============================================================ */
+.candidate-detail {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.candidate-detail:last-child {
+  border-bottom: none;
+}
+
+.candidate-detail--leading {
+  background: var(--accent-soft);
+}
+
+.candidate-rank {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-bold);
+  color: var(--text-inverse);
+}
+
+.candidate-info__name {
+  font-weight: var(--weight-semibold);
+  font-size: var(--text-base);
+  line-height: var(--leading-tight);
+}
+
+.candidate-info__party {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.candidate-votes {
+  text-align: right;
+}
+
+.candidate-votes__count {
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  font-variant-numeric: tabular-nums;
+  line-height: var(--leading-tight);
+}
+
+.candidate-votes__pct {
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer {
+  background: var(--bg-dark);
+  color: rgba(255,255,255,0.5);
+  padding: var(--space-2xl) 0;
+  margin-top: var(--space-3xl);
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  border-top: 3px solid var(--nepal-crimson);
+}
+
+.site-footer__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.site-footer__disclaimer {
+  max-width: 640px;
+  font-size: var(--text-xs);
+  line-height: var(--leading-relaxed);
+  color: rgba(255,255,255,0.35);
+}
+
+.site-footer__links {
+  display: flex;
+  gap: var(--space-lg);
+}
+
+.site-footer__link {
+  color: rgba(255,255,255,0.5);
+  font-size: var(--text-xs);
+}
+.site-footer__link:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+.site-footer__source {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--text-xs);
+  color: rgba(255,255,255,0.35);
+}
+
+.site-footer__source-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.25);
+}
+
+/* ============================================================
+   BREADCRUMB
+   ============================================================ */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+  padding: var(--space-md) 0 0;
+}
+
+.breadcrumb a {
+  color: var(--text-secondary);
+}
+.breadcrumb a:hover {
+  color: var(--text-primary);
+}
+
+.breadcrumb__sep {
+  margin: 0 2px;
+  opacity: 0.4;
+}
+
+/* ============================================================
+   PROVINCE CARD (on homepage map section)
+   ============================================================ */
+.province-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+.province-summary {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: start;
+  gap: var(--space-md);
+  text-decoration: none;
+  color: inherit;
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.province-summary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--nepal-crimson);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.province-summary:hover {
+  border-color: var(--nepal-crimson);
+  box-shadow: var(--shadow-md);
+  text-decoration: none;
+  transform: translateY(-2px);
+}
+
+.province-summary:hover::before {
+  opacity: 1;
+}
+
+.province-summary__name {
+  font-family: var(--font-heading);
+  font-size: var(--text-md);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  color: var(--nepal-blue);
+}
+
+.province-summary__meta {
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+  margin-top: 2px;
+}
+
+.province-summary__seats {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.province-summary__seat-group {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  font-variant-numeric: tabular-nums;
+}
+
+.province-summary__seat-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+}
+
+/* ============================================================
+   DATA SOURCE BADGE
+   ============================================================ */
+.source-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+  font-weight: var(--weight-medium);
+}
+
+.source-badge__icon {
+  width: 12px;
+  height: 12px;
+  opacity: 0.5;
+}
+
+/* ============================================================
+   TWO COLUMN LAYOUT (used on province pages)
+   ============================================================ */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (min-width: 640px) {
+  :root {
+    --gutter: 2rem;
+    --text-3xl: 2.5rem;
+    --header-height: 3.75rem;
+  }
+
+  .stat-banner__grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .vote-bar-row {
+    grid-template-columns: 180px 1fr 80px;
+  }
+
+  .province-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .two-col {
+    grid-template-columns: 340px 1fr;
+  }
+
+  .province-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .site-header__subtitle {
+    display: inline;
+  }
+}
+
+@media (max-width: 639px) {
+  .stat-banner__item:not(:last-child) {
+    border-right: none;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .stat-banner__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stat-banner__item {
+    padding: var(--space-sm);
+  }
+
+  .vote-bar-row {
+    grid-template-columns: 1fr 50px;
+  }
+
+  .vote-bar-track {
+    display: none;
+  }
+
+  .site-header__nav {
+    gap: var(--space-sm);
+  }
+
+  .site-header__subtitle {
+    display: none;
+  }
+
+  .constituency-row {
+    grid-template-columns: 1fr auto;
+    gap: var(--space-sm);
+  }
+
+  .candidate-detail {
+    grid-template-columns: auto 1fr;
+  }
+  
+  .candidate-votes {
+    grid-column: 1 / -1;
+    text-align: left;
+    display: flex;
+    gap: var(--space-sm);
+    align-items: baseline;
+  }
+}
+
+/* ---- Print styles ---- */
+@media print {
+  .site-header, .site-footer, .search-btn, .live-bar {
+    display: none;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+    font-size: 11pt;
+  }
+
+  .container {
+    max-width: 100%;
+    padding: 0;
+  }
+
+  .data-table {
+    border: 1px solid #999;
+  }
+}
